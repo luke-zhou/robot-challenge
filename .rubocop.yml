@@ -1,0 +1,15 @@
+Metrics/BlockLength:
+  Exclude:
+    - Rakefile
+    - '.bundle/**/*'
+    - 'bin/**/*'
+    - 'spec/**/*'
+Style/Documentation:
+  Enabled: false
+Layout/LineLength:
+  Exclude:
+    - 'spec/spec_helper.rb'
+Naming/MethodParameterName:
+  Enabled: false
+Style/AccessModifierDeclarations:
+  EnforcedStyle: 'inline'
