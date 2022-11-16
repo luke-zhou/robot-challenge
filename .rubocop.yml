@@ -13,3 +13,9 @@ Naming/MethodParameterName:
   Enabled: false
 Style/AccessModifierDeclarations:
   EnforcedStyle: 'inline'
+Metrics/MethodLength:
+  Exclude:
+  - 'lib/model/world.rb'
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false

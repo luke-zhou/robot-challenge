@@ -1,32 +1,41 @@
 # frozen_string_literal: true
 
 class Direction
-  attr_accessor :axis, :sign
+  attr_accessor :angle
 
   DIRECTIONS = {
-    'NORTH' => [:y, 1],
-    'SOUTH' => [:y, -1],
-    'EAST' => [:x, 1],
-    'WEST' => [:x, -1]
+    'NORTH' => 90,
+    'SOUTH' => 270,
+    'EAST' => 0,
+    'WEST' => 180
   }.freeze
 
-  def initialize(axis, sign)
-    @axis = axis
-    @sign = sign
+  NAME = {
+    90 => 'NORTH',
+    270 => 'SOUTH',
+    0 => 'EAST',
+    180 => 'WEST'
+  }.freeze
+
+  def initialize(angle)
+    @angle = angle
   end
 
   def self.parse(direction_string)
-    raise 'Unknow Direction' unless DIRECTIONS[direction_string]
+    raise 'Unknown Direction' unless DIRECTIONS[direction_string]
 
-    Direction.new(*DIRECTIONS[direction_string])
+    Direction.new(DIRECTIONS[direction_string])
   end
 
   def name
-    case axis
-    when :x
-      sign == 1 ? 'EAST' : 'WEST'
-    when :y
-      sign == 1 ? 'NORTH' : 'SOUTH'
-    end
+    NAME[angle].nil? ? 'UNKNOWN' : NAME[angle]
+  end
+
+  def turn_clock_wise(angle)
+    self.angle = (self.angle - angle)%360
+  end
+
+  def turn_anti_clock_wise(angle)
+    self.angle = (self.angle + angle)%360
   end
 end
