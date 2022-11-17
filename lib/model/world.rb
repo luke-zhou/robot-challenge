@@ -3,13 +3,11 @@
 require 'model/robot'
 require 'model/position'
 require 'model/command'
-require 'logging'
+require 'logger'
 
 class World
   attr_accessor :robot
 
-  @@logger = Logging.logger[self]
-  
   def initialize(length, width)
     @length = length
     @width = width
@@ -21,24 +19,7 @@ class World
   end
 
   def excute(command)
-    @@logger.info "excute #{command.name}"
-    case command.name
-    when :PLACE
-      place_robot(command)
-    when :MOVE
-      robot_move
-    when :LEFT
-      @robot.turn_left
-    when :RIGHT
-      @robot.turn_right
-    when :REPORT
-      result = @robot.report
-    end
-
-    return result if result
-  end
-
-  def excute_single_command(commands)
+    Logger.instance.info "excute #{command.name}"
     case command.name
     when :PLACE
       place_robot(command)
@@ -62,15 +43,23 @@ class World
   end
 
   def place_robot(place_command)
-    @robot.put_in(*place_command.args) if position_is_valid?(place_command.args[0])
+    if position_is_valid?(place_command.args[0])
+      @robot.put_in(*place_command.args)
+    else
+      Logger.instance.warn("Fail to place robot on #{place_command.args[0]}")
+    end
   end
 
   def robot_move
     return unless @robot.placed?
 
     new_position = @robot.move
-    @robot.roll_back unless position_is_valid?(new_position)
+
+    return if position_is_valid?(new_position)
+
+    @robot.roll_back
+    Logger.instance.warn("Fail to move robot to #{new_position}")
   end
 
-  private :place_robot, :robot_move, :position_is_valid?, :excute_single_command
+  private :place_robot, :robot_move, :position_is_valid?
 end

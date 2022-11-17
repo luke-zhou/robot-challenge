@@ -18,8 +18,10 @@ describe Command do
       expect(Command.parse('PLACE 1,2,NORTH').args[1].name).to eq('NORTH')
     end
     it 'parse invalid input - place' do
-      expect { Command.parse('PLACE a,b,NORTH') }.to raise_error 'Invalid Command'
-      expect { Command.parse('PLACE a,b,INVALID') }.to raise_error 'Invalid Command'
+      command1 = 'PLACE a,b,NORTH'
+      command2 = 'PLACE a,b,INVALID'
+      expect { Command.parse(command1) }.to raise_error 'Invalid Command'
+      expect { Command.parse(command2) }.to raise_error 'Invalid Command'
     end
     it 'parse invalid input' do
       expect { Command.parse('INVALID') }.to raise_error 'Invalid Command'

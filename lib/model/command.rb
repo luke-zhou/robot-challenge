@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'model/direction'
 
 class Command
@@ -13,7 +14,7 @@ class Command
     case command_string
     when /^PLACE\s+\d+\s*,\s*\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/
       build_place_command(command_string)
-    when /^MOVE$/, /^LEFT$/, /^RIGHT$/, /^REPORT$/
+    when /^(MOVE|LEFT|RIGHT|REPORT)$/
       Command.new(command_string)
     else
       raise 'Invalid Command'

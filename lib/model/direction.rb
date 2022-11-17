@@ -32,10 +32,10 @@ class Direction
   end
 
   def turn_clock_wise(angle)
-    self.angle = (self.angle - angle)%360
+    self.angle = (self.angle - angle) % 360
   end
 
   def turn_anti_clock_wise(angle)
-    self.angle = (self.angle + angle)%360
+    self.angle = (self.angle + angle) % 360
   end
 end

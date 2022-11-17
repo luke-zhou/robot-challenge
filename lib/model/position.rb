@@ -7,4 +7,8 @@ class Position
     @x = x
     @y = y
   end
+
+  def to_s
+    "(x:#{x}, y:#{y})"
+  end
 end

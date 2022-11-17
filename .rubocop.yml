@@ -16,6 +16,6 @@ Style/AccessModifierDeclarations:
 Metrics/MethodLength:
   Exclude:
   - 'lib/model/world.rb'
-AllCops:
-  NewCops: enable
-  SuggestExtensions: false
+Metrics/CyclomaticComplexity:
+  Exclude:
+  - 'lib/model/world.rb'
