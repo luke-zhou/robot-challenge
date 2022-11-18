@@ -1,0 +1,236 @@
+Test1:
+  Description: 'test multiple reports'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 0,0,NORTH'
+    - 'MOVE'
+    - 'REPORT'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE'
+    - 'REPORT'
+    - 'LEFT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'LEFT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'EXIT'
+  Results:
+    - '0, 1, NORTH'
+    - '3, 1, EAST'
+    - '3, 2, NORTH'
+    - '2, 2, WEST'
+Test2A:
+  Description: 'invalid place test'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE -1,0,NORTH'
+    - 'PLACE 0,-1,NORTH'
+    - 'PLACE -1,-1,NORTH'
+    - 'PLACE 5,0,NORTH'
+    - 'PLACE 0,5,NORTH'
+    - 'PLACE 5,5,NORTH'
+    - 'PLACE -1,0,INVALID'
+    - 'EXIT'
+Test2B:
+  Description: 'valid place test'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 2,3,NORTH'
+    - 'REPORT'
+    - 'EXIT'
+  Results:
+    - '2, 3, NORTH'
+Test3:
+  Description: 'edge test and multiple place'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 0,0,SOUTH'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'PLACE 0,4,NORTH'
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'PLACE 4,4,NORTH'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'PLACE 4,0,SOUTH'
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'EXIT'
+  Results:
+    - '0, 0, WEST'
+    - '0, 4, WEST'
+    - '4, 4, EAST'
+    - '4, 0, EAST'
+Test4:
+  Description: 'ignore non-place input if robot not placed'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'REPORT'
+    - 'EXIT'
+Test5:
+  Description: 'turn left *8'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 2,2,NORTH'
+    - 'LEFT'
+    - 'LEFT'
+    - 'LEFT'
+    - 'LEFT'
+    - 'LEFT'
+    - 'LEFT'
+    - 'LEFT'
+    - 'LEFT'
+    - 'REPORT'
+    - 'EXIT'
+  Results:
+    - '2, 2, NORTH'
+Test6:
+  Description: 'turn right *8'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 2,2,NORTH'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'RIGHT'
+    - 'REPORT'
+    - 'EXIT'
+  Results:
+    - '2, 2, NORTH'
+Test7:
+  Description: 'invalid input test'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'place'
+    - 'tttt'
+    - 'stop'
+    - 'go'
+    - 'how'
+    - 'are'
+    - 'you'
+    - '12345'
+    - '!!@#$%'
+    - '{}||}'
+    - '[]\]'
+Test8:
+  Description: 'all direction move test'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 2,2,NORTH'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE' 
+    - 'RIGHT'
+    - 'REPORT'  
+  Results:
+    - '2, 2, NORTH'
+Test9:
+  Description: 'multi-move to the edge test'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 2,2,NORTH'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE' 
+    - 'REPORT'  
+  Results:
+    - '2, 4, NORTH'
+Test10:
+  Description: 'full function test - (2,2)-> (0,4)'
+  Length: 5
+  Width: 5
+  CompareResult: true
+  Actions:
+    - 'PLACE 2,2,WEST'
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'LEFT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE' 
+    - 'MOVE' 
+    - 'RIGHT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE' 
+    - 'MOVE'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE' 
+    - 'MOVE'
+    - 'MOVE'
+    - 'RIGHT'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE'
+    - 'MOVE' 
+    - 'MOVE'
+    - 'MOVE'
+    - 'REPORT'  
+    - 'EXIT'
+  Results:
+    - '0, 4, NORTH'
