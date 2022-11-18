@@ -3,16 +3,17 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'model/world'
 require 'logger'
-require 'process'
 
 logger = Logger.instance
 # TODO: easy to test, turn on when submit
-input_case_sensitive = false
+input_case_sensitive = true
 
 puts 'Let us start:'
 logger.info('Program starts.')
 
-world = World.new(5, 5)
+WIDTH = 5
+LENGTH = 5
+world = World.new(WIDTH, LENGTH)
 loop do
   logger.info("World Status: #{world.status}")
 
@@ -25,7 +26,7 @@ loop do
   begin
     command = Command.parse(input)
   rescue StandardError => e
-    logger.instance.error(e.message)
+    logger.warn(e.message)
   end
 
   result = world.excute(command) if command

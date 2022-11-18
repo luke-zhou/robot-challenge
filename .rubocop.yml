@@ -16,6 +16,7 @@ Style/AccessModifierDeclarations:
 Metrics/MethodLength:
   Exclude:
   - 'lib/model/world.rb'
+  - 'lib/main_file.rb'
 Metrics/CyclomaticComplexity:
   Exclude:
   - 'lib/model/world.rb'

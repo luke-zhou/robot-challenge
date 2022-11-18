@@ -16,6 +16,8 @@ Code Challenge to build a toy robot, which can follow a list of commands
 - Exit: `EXIT` to exit the program.
 
 - Logger File: `./robot-challenge.log`
+
+- Test Cases: `./resource/test-data.yml`
 ## Description
 
 - The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.

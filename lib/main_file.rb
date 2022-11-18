@@ -5,22 +5,42 @@ require 'model/world'
 
 require 'logger'
 
+def load_data
+  YAML.load_file(ARGV[0])
+rescue Errno::ENOENT
+  msg = "Error to load input file: #{ARGV[0]}"
+  Logger.instance.error(msg)
+  puts msg
+  exit
+end
+
+def test_result(name, expected, actual)
+  logger = Logger.instance
+
+  if expected == actual
+    logger.info('Test Passed.')
+    puts("Test(#{name}) passed.")
+  else
+    logger.error('Test Failed.')
+    logger.error("Expected: #{expected}")
+    logger.error("Actual:   #{actual}")
+    puts("Test(#{name}) failed. ")
+    puts("Test(#{name}) Expected: #{expected}")
+    puts("Test(#{name}) Actual:   #{actual}")
+  end
+end
+
 logger = Logger.instance
 
-begin
-  file_name = ARGV[0]
-  test_data = YAML.load_file(file_name)
-rescue Errno::ENOENT
-  logger.error("Error to load input file: #{file_name}")
-  return
-end
+test_data = load_data
 
 test_data.each do |test, data|
   logger.info("Program starts for #{test}")
-  logger.info(data['Description'])
+  logger.info("Description: #{data['Description']}")
 
   world = World.new(data['Length'], data['Width'])
-  expected = data['Results'] ? data['Results'] : []
+  expected = data['Results'] || []
+  compare_result = data['CompareResult']
   actual = []
 
   data['Actions'].each do |a|
@@ -31,18 +51,14 @@ test_data.each do |test, data|
     begin
       command = Command.parse(input)
     rescue StandardError => e
-      logger.error(e.message)
+      logger.warn(e.message)
     end
 
     result = world.excute(command) if command
     actual << result if result
   end
-  if expected == actual
-    logger.info('Test Passed.')
-  else
-    logger.error('Test Failed.')
-    logger.error("Expected: #{expected}")
-    logger.error("Actual:   #{actual}")
-  end
+
+  test_result(test, expected, actual) if compare_result
+
   logger.info("Program ends for #{test}\n")
 end

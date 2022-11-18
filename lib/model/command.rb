@@ -12,7 +12,7 @@ class Command
 
   def self.parse(command_string)
     case command_string
-    when /^PLACE\s+\d+\s*,\s*\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/
+    when /^PLACE\s+-?\d+\s*,\s*-?\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/
       build_place_command(command_string)
     when /^(MOVE|LEFT|RIGHT|REPORT)$/
       Command.new(command_string)
