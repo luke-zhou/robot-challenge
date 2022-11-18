@@ -13,12 +13,6 @@ end
 
 task default: %w[lint test]
 
-# task :run, [:file] do |t, args|
-#   puts "Args were: #{args} of class #{args.class}"
-#   puts "Args were: #{args[:file]} of class #{args[:file].class}"
-#   ruby 'lib/main.rb'
-# end
-
 task :run, [:file] do |t, args|
   options = {}
   opts = OptionParser.new
