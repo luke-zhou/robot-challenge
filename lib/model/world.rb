@@ -6,7 +6,7 @@ require 'model/command'
 require 'logger'
 
 class World
-  attr_accessor :robot
+  attr_reader :robot
 
   def initialize(length, width)
     @length = length

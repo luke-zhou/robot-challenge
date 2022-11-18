@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Direction
-  attr_accessor :angle
+  attr_reader :angle
 
   DIRECTIONS = {
     'NORTH' => 90,
@@ -32,10 +32,10 @@ class Direction
   end
 
   def turn_clock_wise(angle)
-    self.angle = (self.angle - angle) % 360
+    @angle = (@angle - angle) % 360
   end
 
   def turn_anti_clock_wise(angle)
-    self.angle = (self.angle + angle) % 360
+    @angle = (@angle + angle) % 360
   end
 end

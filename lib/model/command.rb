@@ -3,7 +3,7 @@
 require 'model/direction'
 
 class Command
-  attr_accessor :name, :args
+  attr_reader :name, :args
 
   def initialize(name, args = nil)
     @name = name.to_sym
