@@ -29,7 +29,7 @@ module Game
     end
 
     def name
-      NAME[angle].nil? ? 'UNKNOWN' : NAME[angle]
+      NAME[@angle].nil? ? 'UNKNOWN' : NAME[@angle]
     end
 
     def turn_clock_wise(angle)

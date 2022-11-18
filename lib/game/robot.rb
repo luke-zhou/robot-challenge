@@ -14,7 +14,7 @@ module Game
     end
 
     def report
-      "#{position.x}, #{position.y}, #{direction.name}" if placed?
+      "#{@position.x}, #{@position.y}, #{@direction.name}" if placed?
     end
 
     def turn_left
@@ -46,11 +46,11 @@ module Game
     end
 
     def cal_x_move(direction)
-      Math.cos(direction.angle / 180.0 * Math::PI).round.to_i
+      ::Math.cos(direction.angle / 180.0 * ::Math::PI).round.to_i
     end
 
     def cal_y_move(direction)
-      Math.sin(direction.angle / 180.0 * Math::PI).round.to_i
+      ::Math.sin(direction.angle / 180.0 * ::Math::PI).round.to_i
     end
 
     def backup_current_position

@@ -2,21 +2,18 @@
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'game'
-
-require 'logger'
+require 'yaml'
 
 def load_data
-  YAML.load_file(ARGV[0])
+  ::YAML.load_file(ARGV[0])
 rescue Errno::ENOENT
   msg = "Error to load input file: #{ARGV[0]}"
-  Logger.instance.error(msg)
+  logger.error(msg)
   puts msg
   exit
 end
 
 def test_result(name, expected, actual)
-  logger = Logger.instance
-
   if expected == actual
     logger.info('Test Passed.')
     puts("Test(#{name}) passed.")
@@ -29,8 +26,6 @@ def test_result(name, expected, actual)
     puts("Test(#{name}) Actual:   #{actual}")
   end
 end
-
-logger = Logger.instance
 
 test_data = load_data
 

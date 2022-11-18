@@ -2,9 +2,7 @@
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'game'
-require 'logger'
 
-logger = Logger.instance
 # TODO: easy to test, turn on when submit
 input_case_sensitive = true
 
@@ -34,3 +32,4 @@ loop do
 end
 
 logger.info("Program ends.\n")
+logger.close

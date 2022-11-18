@@ -10,7 +10,7 @@ module Game
     end
 
     def to_s
-      "(x:#{x}, y:#{y})"
+      "(x:#{@x}, y:#{@y})"
     end
   end
 end
