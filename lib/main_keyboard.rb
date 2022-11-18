@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'model/world'
+require 'game'
 require 'logger'
 
 logger = Logger.instance
@@ -13,7 +13,7 @@ logger.info('Program starts.')
 
 WIDTH = 5
 LENGTH = 5
-world = World.new(WIDTH, LENGTH)
+world = Game::World.new(WIDTH, LENGTH)
 loop do
   logger.info("World Status: #{world.status}")
 
@@ -24,7 +24,7 @@ loop do
   break if input =~ /EXIT/
 
   begin
-    command = Command.parse(input)
+    command = Game::Command.parse(input)
   rescue StandardError => e
     logger.warn(e.message)
   end

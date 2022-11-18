@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'model/world'
+require 'game'
 
 require 'logger'
 
@@ -38,7 +38,7 @@ test_data.each do |test, data|
   logger.info("Program starts for #{test}")
   logger.info("Description: #{data['Description']}")
 
-  world = World.new(data['Length'], data['Width'])
+  world = Game::World.new(data['Length'], data['Width'])
   expected = data['Results'] || []
   compare_result = data['CompareResult']
   actual = []
@@ -49,7 +49,7 @@ test_data.each do |test, data|
     break if input =~ /EXIT/
 
     begin
-      command = Command.parse(input)
+      command = Game::Command.parse(input)
     rescue StandardError => e
       logger.warn(e.message)
     end

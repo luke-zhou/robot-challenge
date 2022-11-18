@@ -15,8 +15,8 @@ Style/AccessModifierDeclarations:
   EnforcedStyle: 'inline'
 Metrics/MethodLength:
   Exclude:
-  - 'lib/model/world.rb'
+  - 'lib/game/world.rb'
   - 'lib/main_file.rb'
 Metrics/CyclomaticComplexity:
   Exclude:
-  - 'lib/model/world.rb'
+  - 'lib/game/world.rb'

@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'model/position'
-require 'model/world'
-
-describe World do
+describe Game::World do
   dimension = 5
   describe '#position_is_valid?' do
-    let(:world) { World.new(dimension, dimension) }
+    let(:world) { Game::World.new(dimension, dimension) }
 
     it 'returns true when x and y are valid' do
-      position = Position.new(2, 3)
+      position = Game::Position.new(2, 3)
 
       expect(world.send(:position_is_valid?, position)).to be true
     end
@@ -21,7 +17,7 @@ describe World do
         [2, dimension],
         [dimension, dimension]
       ]
-      positions.map { |p| Position.new(*p) }.each do |p|
+      positions.map { |p| Game::Position.new(*p) }.each do |p|
         expect(world.send(:position_is_valid?, p)).to be false
       end
     end
@@ -32,7 +28,7 @@ describe World do
         [2, -1],
         [-1, -1]
       ]
-      positions.map { |p| Position.new(*p) }.each do |p|
+      positions.map { |p| Game::Position.new(*p) }.each do |p|
         expect(world.send(:position_is_valid?, p)).to be false
       end
     end
@@ -44,16 +40,16 @@ describe World do
         [0, dimension - 1],
         [0, 0]
       ]
-      positions.map { |p| Position.new(*p) }.each do |p|
+      positions.map { |p| Game::Position.new(*p) }.each do |p|
         expect(world.send(:position_is_valid?, p)).to be true
       end
     end
   end
 
   describe '#place_robot' do
-    let(:world) { World.new(dimension, dimension) }
+    let(:world) { Game::World.new(dimension, dimension) }
     it 'should place robot with valid position' do
-      place_command = Command.parse('PLACE 1, 2, NORTH')
+      place_command = Game::Command.parse('PLACE 1, 2, NORTH')
       world.send(:place_robot, place_command)
       expect(world.robot.placed?).to be true
       expect(world.robot.position.x).to eq(1)
@@ -62,14 +58,14 @@ describe World do
   end
 
   describe '#robot_move' do
-    let(:world) { World.new(dimension, dimension) }
+    let(:world) { Game::World.new(dimension, dimension) }
     it 'should have no action if robot is not placed' do
       world.send(:robot_move)
       expect(world.robot.placed?).to be false
       expect(world.robot.position).to be nil
     end
     it 'should have roll back if new position is invalid' do
-      place_command = Command.parse('PLACE 0, 0, SOUTH')
+      place_command = Game::Command.parse('PLACE 0, 0, SOUTH')
       world.send(:place_robot, place_command)
       world.send(:robot_move)
       expect(world.robot.placed?).to be true
@@ -77,7 +73,7 @@ describe World do
       expect(world.robot.position.y).to eq(0)
     end
     it 'should move if new position is valid' do
-      place_command = Command.parse('PLACE 0, 0, NORTH')
+      place_command = Game::Command.parse('PLACE 0, 0, NORTH')
       world.send(:place_robot, place_command)
       world.send(:robot_move)
       expect(world.robot.placed?).to be true
